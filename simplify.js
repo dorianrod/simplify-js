@@ -106,8 +106,11 @@ function simplify(points, tolerance, highestQuality) {
 
     var sqTolerance = tolerance !== undefined ? tolerance * tolerance : 1;
 
-    points = highestQuality ? points : simplifyRadialDist(points, sqTolerance);
-    points = simplifyDouglasPeucker(points, sqTolerance);
+    if(highestQuality) {
+        points = simplifyDouglasPeucker(points, sqTolerance);
+    } else {
+        points = simplifyRadialDist(points, sqTolerance);
+    }
 
     return points;
 }
